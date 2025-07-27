@@ -30,7 +30,9 @@ const updateImage =(variantImage)=>{
 <div class="product-display">
   <div class="product-container">
     <div class="product-image">
-      <img v-bind:src="image"/>
+      <img 
+        v-bind:src="image"
+        :class="{OutofStockImg:!instock}"/>
     </div>
     <div class="product-info">
       <h1>{{ product }}</h1>
