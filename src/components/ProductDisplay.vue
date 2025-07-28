@@ -95,7 +95,7 @@
     </button>
     </div>
   </div>
-  <ReviewList/>
+  <ReviewList v-if="reviews.length > 0" :reviews="reviews"/>
   <ReviewForm @review-submitted="addReview"/>
 </div>
 </template>

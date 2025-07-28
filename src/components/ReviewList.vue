@@ -15,6 +15,8 @@ defineProps({
                 <span>{{ review.name }} gave this {{ review.rating }} stars</span>
                 <br/>
                 <span>"{{ review.content }}"</span>
+                <span v-if="review.recommendation = 'yes'">I reccomend this product</span>
+                <span v-else>I do not reccomend this product</span>
             </li>
         </ul>
     </div>

@@ -6,7 +6,8 @@ const emit = defineEmits(['review-submitted'])
 const review = reactive({
   name: '',
   content: '',
-  rating: null
+  rating: null,
+  recommendation: '',
 })
 
 const onSubmit = () => {
@@ -18,13 +19,15 @@ const onSubmit = () => {
   const productReview = {
     name: review.name,
     content: review.content,
-    rating: review.rating
+    rating: review.rating,
+    recommendation: review.recommendation
   }
   emit('review-submitted', productReview)
 
   review.name = ''
   review.content = ''
   review.rating = null
+  review.recommendation = ''
 }
 </script>
 
@@ -44,6 +47,12 @@ const onSubmit = () => {
       <option>3</option>
       <option>2</option>
       <option>1</option>
+    </select>
+
+    <label for="recommendation">Would you reccomend this product?</label>
+    <select id="recommendation">
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
     </select>
 
     <input class="button" type="submit" value="Submit">
