@@ -10,45 +10,49 @@
       }
     })
 
-  const product = ref('Socks');
-  const brand = ref('Vue Mastery')
+    const emit = defineEmits(['add-to-cart'])
 
-  const selectedVariant = ref(0)
+    const product = ref('Socks');
+    const brand = ref('Vue Mastery')
 
-  const details = ref(['50% cotton', '30% wool', '20% polyester'])
-  const variants = ref([
-    {id: 2224, color:'green', image: socksGreenImage, quantity: 50},
-    {id: 2225, color:'blue', image: socksBlueImage, quantity: 0},
-  ])
+    const selectedVariant = ref(0)
+
+    const details = ref(['50% cotton', '30% wool', '20% polyester'])
+    const variants = ref([
+      {id: 2224, color:'green', image: socksGreenImage, quantity: 50},
+      {id: 2225, color:'blue', image: socksBlueImage, quantity: 0},
+    ])
 
 
-  const title = computed(() =>{
-    return brand.value +  ' ' + product.value
-  })
+    const title = computed(() =>{
+      return brand.value +  ' ' + product.value
+    })
 
-  const addToCart = () => cart.value +=1;
-
-  const updateVariant = (index)=>{
-    selectedVariant.value = index
-    console.log(index)
-  }
-
-  const image = computed(()=>{
-    return variants.value[selectedVariant.value].image
-  })
-
-  const inStock = computed(()=>{
-    return variants.value[selectedVariant.value].quantity > 0
-  })
-
-  const shipping = computed(()=>{
-    if(props.premium){
-      return 'Free'
+    const addToCart = () => {
+      emit('add-to-cart', variants.value[selectedVariant.value].id)
     }
-    else{
-      2.99
+
+    const updateVariant = (index)=>{
+      selectedVariant.value = index
+      console.log(index)
     }
-  })
+
+    const image = computed(()=>{
+      return variants.value[selectedVariant.value].image
+    })
+
+    const inStock = computed(()=>{
+      return variants.value[selectedVariant.value].quantity > 0
+    })
+
+    const shipping = computed(()=>{
+      if(props.premium){
+        return 'Free'
+      }
+      else{
+        2.99
+      }
+    })
 </script>
 
 <template>
