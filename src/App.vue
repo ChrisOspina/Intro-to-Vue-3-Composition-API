@@ -9,12 +9,16 @@
     cart.value.push(id)
   }
 
+  const decreaseCart = (id)=>{
+      cart.value.pop(id)
+  }
+
 </script>
 
 <template>
   <div class="nav-bar"></div>
   <div class="cart">Cart({{ cart.length }})</div>
-  <ProductDisplay :premium="premium" @add-to-cart="updateCart"/>
+  <ProductDisplay :premium="premium" @add-to-cart="updateCart" @remove-from-cart="decreaseCart"/>
   <ProductDisplay/>
   <ProductDisplay/>
 </template>

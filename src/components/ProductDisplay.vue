@@ -10,7 +10,7 @@
       }
     })
 
-    const emit = defineEmits(['add-to-cart'])
+    const emit = defineEmits(['add-to-cart', 'remove-from-cart'])
 
     const product = ref('Socks');
     const brand = ref('Vue Mastery')
@@ -30,6 +30,10 @@
 
     const addToCart = () => {
       emit('add-to-cart', variants.value[selectedVariant.value].id)
+    }
+
+    const removeFromCart =() =>{
+      emit('remove-from-cart', variants.value[selectedVariant.value].id)
     }
 
     const updateVariant = (index)=>{
@@ -85,7 +89,16 @@
       >
       Add to Cart
     </button>
+       <button 
+        class="button" 
+        :class="{ disabledButton: !inStock }"
+        v-on:click="removeFromCart"
+        :disabled="!inStock"
+      >
+      Remove
+    </button>
     </div>
+      
   </div>
 </div>
 </template>
