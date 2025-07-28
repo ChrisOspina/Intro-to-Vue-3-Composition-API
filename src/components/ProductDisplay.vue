@@ -2,6 +2,8 @@
   import { ref, computed } from 'vue';
   import socksGreenImage from '../assets/images/socks_green.jpeg';
   import socksBlueImage from '../assets/images/socks_blue.jpeg';
+  import ReviewForm from './ReviewForm.vue';
+  import ReviewList from './ReviewList.vue';
 
     const props = defineProps({
       premium:{
@@ -23,6 +25,7 @@
       {id: 2225, color:'blue', image: socksBlueImage, quantity: 0},
     ])
 
+    const reviews = ref([])
 
     const title = computed(() =>{
       return brand.value +  ' ' + product.value
@@ -31,6 +34,11 @@
     const addToCart = () => {
       emit('add-to-cart', variants.value[selectedVariant.value].id)
     }
+
+    const addReview = (review) =>{
+      reviews.value.push(review);
+    }
+
 
     const updateVariant = (index)=>{
       selectedVariant.value = index
@@ -87,5 +95,7 @@
     </button>
     </div>
   </div>
+  <ReviewList/>
+  <ReviewForm @review-submitted="addReview"/>
 </div>
 </template>
